@@ -2,7 +2,7 @@
 
 Personal skills for AI agents (Codex, OpenCode, OpenClaw, etc.)
 
-## research
+## openclaw-research
 
 Deep research skill that spawns sub-agents to gather and synthesize information on any topic.
 
@@ -12,7 +12,7 @@ Deep research skill that spawns sub-agents to gather and synthesize information 
 npx skillsadd <owner>/skills
 ```
 
-Or copy the `research/` folder to your agent's skills directory.
+Or copy the `openclaw-research/` folder to your agent's skills directory.
 
 ### Usage
 
