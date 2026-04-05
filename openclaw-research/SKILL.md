@@ -1,5 +1,5 @@
 ---
-name: research
+name: openclaw-research
 description: "Deep research on any topic using web search and synthesis. Use when: (1) user asks about something you don't have detailed knowledge of, (2) you want to dive deeper into a topic before answering, (3) you need current information from the web, (4) user asks you to research X or look into Y. Triggers on: research, look into, find out, investigate, deep dive, what's the latest on, can you find info"
 ---
 
