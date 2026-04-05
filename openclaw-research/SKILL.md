@@ -1,77 +1,76 @@
 ---
 name: openclaw-research
-description: "Deep research on any topic using web search and synthesis. Use when: (1) user asks about something you don't have detailed knowledge of, (2) you want to dive deeper into a topic before answering, (3) you need current information from the web, (4) user asks you to research X or look into Y. Triggers on: research, look into, find out, investigate, deep dive, what's the latest on, can you find info"
+description: "Deep research on any topic using web search and synthesis. Use when: (1) user asks about something you lack detailed knowledge of, (2) you want to verify or expand your answer with web research before responding, (3) you need current/time-sensitive information, (4) user explicitly asks to research, look into, investigate, or deep dive on a topic. Triggers on: research, look into, find out, investigate, deep dive, what's the latest on, can you find info, tell me more about."
 ---
 
-# Research Skill
+# OpenClaw Research Skill
 
-Spawn a research sub-agent to gather and synthesize information on any topic.
+Spawn a background research agent to gather and synthesize information on any topic.
 
-## When to Use This Skill
+## When to Spawn
 
-- User asks about something you don't have detailed/current knowledge of
-- You want to verify or expand your answer with web research
-- User explicitly asks you to research something
-- Information needed is time-sensitive or may have changed since training
-- Topics that require synthesis from multiple sources
+- **Knowledge gap**: You don't have detailed or current knowledge on a topic
+- **Verification**: You want to verify facts before answering
+- **User request**: User asks you to "research X", "look into Y", "find out about Z"
+- **Time sensitivity**: Information may have changed since training data
+- **Synthesis needed**: Topic requires combining multiple sources
 
-## How It Works
+## Spawn Command
 
-1. Spawn a sub-agent with the research task
-2. Agent uses web search to gather information
-3. Agent synthesizes findings into a coherent response
-4. Results are delivered back to you
-
-## Spawning the Research Agent
-
-Use `sessions_spawn` with the research task:
+Use `sessions_spawn` in your main session:
 
 ```
-sessions_spawn task: "Research [TOPIC]. Use web search to gather current, accurate information. Synthesize findings into a comprehensive response with key facts, insights, and source links. Focus on [SPECIFIC ASPECTS IF MENTIONED]. Return your findings in a structured format." runTimeoutSeconds: 300 cleanup: "keep"
+sessions_spawn task: "Research [TOPIC]. Use web search to gather current, accurate information from multiple sources. Synthesize findings into a comprehensive response with: (1) brief overview, (2) key facts (3-5 bullets), (3) insights or analysis, (4) source links. Return in structured markdown format." runTimeoutSeconds: 300 cleanup: "keep"
 ```
 
-## Research Workflow
+## Workflow
 
-1. **Define the query** - What's the specific question or aspect to research?
-2. **Set scope** - Broad overview or deep dive? Time period? Geographic focus?
-3. **Spawn agent** - Run the research task
-4. **Synthesize** - Present findings with source citations
-5. **File valuable research** - If findings are worth keeping, add to wiki/ or memory
+1. **Clarify scope** (if needed) — Is it a broad overview or specific deep dive?
+2. **Spawn agent** — Kick off research with clear topic and any specific aspects
+3. **Wait for results** — Sub-agent delivers findings back to you
+4. **Present to user** — Synthesize and share the research
+5. **File if valuable** — Good research goes to wiki/ for compounding
 
-## Output Format
+## Output Format (For Spawned Agent)
 
-Research should be returned in this structure:
-
-```
+```markdown
 ## [Topic] Research Findings
 
 ### Overview
-[Brief summary of what you found]
+[Brief 2-3 sentence summary of what you found]
 
 ### Key Facts
-- [Fact 1]
-- [Fact 2]
-- [Fact 3]
+- [Fact 1 with source]
+- [Fact 2 with source]
+- [Fact 3 with source]
 
 ### Insights
-[Analysis or synthesis]
+[Any analysis, implications, or synthesis from the sources]
 
 ### Sources
-- [Source 1](url)
-- [Source 2](url)
+- [Source Name](url)
+- [Source Name](url)
 
-### Relevance to Original Query
+### Relevance
 [How this answers the original question]
 ```
 
-## Pro Tips
+## Tips for Good Research
 
-- **Be specific in the query** - "Research recent developments in LLM reasoning" beats "research AI"
-- **Ask for synthesis** - Don't just dump links; ask for analysis
-- **Time-box research** - 5 minutes is usually enough for most topics
-- **File interesting findings** - Good research should compound in the wiki
+- **Specific queries**: "LLM reasoning improvements 2025-2026" beats "AI news"
+- **Multi-source**: Cross-reference at least 2-3 sources
+- **Prioritize recent**: Check dates, prefer latest information
+- **Ask for synthesis**: Not just links — what does it all mean?
+- **Time-box**: 5 minutes usually sufficient for most topics
+
+## Filing Research
+
+If research is valuable, add to the wiki:
+- Create a new page in `wiki/` for the topic
+- Or append to an existing relevant page
+- Include sources for traceability
 
 ## Related Skills
 
-- wiki/ - Knowledge wiki where research can be filed
-- coding-agent - Use coding agent for technical research or data analysis
+- `wiki/` — File valuable research here
+- `coding-agent/` — For technical deep dives or data analysis
