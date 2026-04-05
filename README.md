@@ -1,6 +1,6 @@
-# OpenClaw Skills
+# Agent SuperSkills
 
-Public skills repository for OpenClaw agents.
+Public skills repository for AI agents.
 
 ## Available Skills
 
@@ -25,7 +25,7 @@ Deep research skill that spawns sub-agents to gather and synthesize information 
 ### Via skills.sh
 
 ```bash
-npx skillsadd <owner>/skills
+npx skillsadd <owner>/agent-superskills
 ```
 
 ### Manual Installation
@@ -45,7 +45,7 @@ cp -r openclaw-research ~/.openclaw/workspace/skills/
 
 ## Contributing
 
-This repo contains public skills for OpenClaw agents. To contribute:
+This repo contains public skills for AI agents. To contribute:
 
 1. Fork this repo
 2. Add your skill under `<skill-name>/SKILL.md`
