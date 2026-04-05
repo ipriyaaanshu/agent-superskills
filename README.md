@@ -1,21 +1,60 @@
-# Skills
+# OpenClaw Skills
 
-Personal skills for AI agents (Codex, OpenCode, OpenClaw, etc.)
+Public skills repository for OpenClaw agents.
 
-## openclaw-research
+## Available Skills
+
+### openclaw-research
 
 Deep research skill that spawns sub-agents to gather and synthesize information on any topic.
 
-### Installation
+**Triggers on:** research, look into, find out, investigate, deep dive, what's the latest on, can you find info
+
+**Use when:**
+- User asks about something you lack detailed knowledge of
+- You want to verify or expand your answer with web research
+- You need current/time-sensitive information
+- User explicitly asks to research a topic
+
+[Learn more →](openclaw-research/SKILL.md)
+
+---
+
+## Installation
+
+### Via skills.sh
 
 ```bash
 npx skillsadd <owner>/skills
 ```
 
-Or copy the `openclaw-research/` folder to your agent's skills directory.
+### Manual Installation
 
-### Usage
+Copy the skill folder to your agent's skills directory:
 
-Triggers on: "research", "look into", "find out", "investigate", "deep dive", "what's the latest on", "can you find info"
+```bash
+cp -r openclaw-research ~/.agents/skills/
+```
 
-When you need current information or want a deep dive on a topic, spawn a research agent to gather web information and synthesize findings.
+For OpenClaw:
+```bash
+cp -r openclaw-research ~/.openclaw/workspace/skills/
+```
+
+---
+
+## Contributing
+
+This repo contains public skills for OpenClaw agents. To contribute:
+
+1. Fork this repo
+2. Add your skill under `<skill-name>/SKILL.md`
+3. Include a clear `name` and `description` in the frontmatter
+4. Test the skill works with your agent
+5. Submit a PR
+
+---
+
+## License
+
+MIT
