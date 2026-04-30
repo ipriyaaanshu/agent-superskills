@@ -38,23 +38,33 @@ Operate Meta Ads through Meta's official Ads CLI for campaign management, asset 
 
 ## Installation
 
-### Via skills.sh
+### Via skills
+
+Install the full repo:
 
 ```bash
-npx skillsadd <owner>/agent-superskills
+npx skills add ipriyaaanshu/agent-superskills
+```
+
+Install a specific skill only:
+
+```bash
+npx skills add ipriyaaanshu/agent-superskills --skill meta-ads-cli
 ```
 
 ### Manual Installation
 
-Copy the skill folder to your agent's skills directory:
+Copy a skill folder to your agent's skills directory.
+
+Example:
 
 ```bash
-cp -r openclaw-research ~/.agents/skills/
+cp -r meta-ads-cli ~/.agents/skills/
 ```
 
 For OpenClaw:
 ```bash
-cp -r openclaw-research ~/.openclaw/workspace/skills/
+cp -r meta-ads-cli ~/.openclaw/workspace/skills/
 ```
 
 ---
