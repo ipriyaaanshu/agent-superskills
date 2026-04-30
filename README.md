@@ -20,6 +20,22 @@ Deep research skill that spawns sub-agents to gather and synthesize information 
 
 ---
 
+### meta-ads-cli
+
+Operate Meta Ads through Meta's official Ads CLI for campaign management, asset discovery, insights extraction, and analytics workflows.
+
+**Triggers on:** meta ads, facebook ads, ad campaigns, ad sets, creatives, insights, ROAS, ad analytics, marketing automation
+
+**Use when:**
+- You need to inspect Meta ad accounts, pages, datasets, or catalogs
+- You want to create or update campaigns, ad sets, creatives, or ads from the terminal
+- You need structured JSON insights for reporting or analytics workflows
+- You want safer, paused-first ad operations with reproducible command recipes
+
+[Learn more →](meta-ads-cli/SKILL.md)
+
+---
+
 ## Installation
 
 ### Via skills.sh
