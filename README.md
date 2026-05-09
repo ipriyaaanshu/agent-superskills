@@ -36,6 +36,22 @@ Operate Meta Ads through Meta's official Ads CLI for campaign management, asset 
 
 ---
 
+### definitive-pdf
+
+Production pipeline for executive-grade PDF proposals and reports — plain white, print-perfect output using WeasyPrint. Avoids the page-split and orphans/widows disasters common with headless-Chrome PDFs.
+
+**Triggers on:** PDF, proposal, report, print, weasyprint, page-break, formatting, executive summary
+
+**Use when:**
+- You need a professional, print-ready PDF (proposals, reports, briefs)
+- Tables, figures, or blocks must not split awkwardly across pages
+- You want plain white backgrounds with clean typography, not dark-mode mess
+- Chrome/Playwright PDFs are producing bad orphans, widows, or broken tables
+
+[Learn more →](productivity/definitive-pdf/SKILL.md)
+
+---
+
 ## Installation
 
 ### Via skills
