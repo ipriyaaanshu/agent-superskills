@@ -7,7 +7,7 @@ author: Hermes Agent
 
 # Definitive PDF — Proposal & Report Pipeline
 
-Use this for any PDF that needs to look professional, print cleanly, and avoid formatting disasters. **Plain white background only. No dark pages, no gradients, no colored backgrounds.**
+Use this for any PDF that needs to look professional, print cleanly, and avoid formatting disasters. **Default: plain white background.** Dark themes are supported — see the Dark Theme section below.
 
 ## Stack
 
@@ -151,6 +151,57 @@ h2, h3 { page-break-after: avoid; }
 4. **No viewport units.** `vh`/`vw` don't work in paged media. Use `mm`, `pt`, or `%`.
 5. **`page-break-inside: avoid`** on tables, figures, blockquotes, callout boxes. Never on large parent containers.
 6. **`thead { display: table-header-group }`** — headers repeat on multi-page tables.
+
+## Dark Theme (When Not White)
+
+Dark backgrounds render perfectly in WeasyPrint as long as the color is set explicitly on `html, body`. The "white only" rule was overly strict.
+
+### Required for dark backgrounds
+
+```css
+html, body {
+  background-color: #0E0D0B;   /* set explicitly */
+  color: #E8DDC4;
+}
+```
+
+### Pitfall: `margin-bottom` on `page-break-inside: avoid` blocks
+
+If two consecutive elements both have `page-break-inside: avoid`, a `margin-bottom` on the first one can force the second onto its own page — creating an orphan.
+
+**Bad:**
+```css
+.cta-block {
+  page-break-inside: avoid;
+  margin-bottom: 24pt;   /* orphan risk */
+}
+.footer {
+  page-break-inside: avoid;
+}
+```
+
+**Good:**
+```css
+.cta-block {
+  page-break-inside: avoid;
+  /* no margin-bottom; let footer flow inline */
+}
+.footer {
+  /* page-break-inside: avoid removed; allow natural flow */
+}
+```
+
+### Break-avoid hierarchy for dark documents
+
+| Element | `page-break-inside` | `page-break-before` |
+|---------|--------------------|---------------------|
+| Stat cards (grid of 3) | `avoid` on `.stat-card` | — |
+| Path cards (grid of 3) | `avoid` on `.path-card` + `.path-card-header` + `.path-body` | `page-break` on parent `.section-block` |
+| Case studies (grid rows) | `avoid` on `.case-study` + `.case-study-metric` + `.case-study-body` | — |
+| Engagement table | `avoid` on `table`, `tr`, and `td` content | — |
+| Narrative/pull-quote | `avoid` on container | — |
+| CTA block | `avoid` on container | — |
+| Footer | **remove** `avoid` — let it flow with CTA | — |
 
 ## Conversion
 
