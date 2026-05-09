@@ -48,7 +48,7 @@ Production pipeline for executive-grade PDF proposals and reports — plain whit
 - You want plain white backgrounds with clean typography, not dark-mode mess
 - Chrome/Playwright PDFs are producing bad orphans, widows, or broken tables
 
-[Learn more →](productivity/definitive-pdf/SKILL.md)
+[Learn more →](definitive-pdf/SKILL.md)
 
 ---
 

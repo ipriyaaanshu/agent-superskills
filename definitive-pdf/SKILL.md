@@ -19,6 +19,56 @@ Use this for any PDF that needs to look professional, print cleanly, and avoid f
 
 If WeasyPrint is not installed: `python3 -m venv /tmp/pdfenv && source /tmp/pdfenv/bin/activate && pip install weasyprint`
 
+## Prerequisites
+
+### System packages (install once)
+
+| Package | Provides | Why |
+|---------|----------|-----|
+| `python3-venv` or `python3-virtualenv` | `venv` module | Create `/tmp/pdfenv` |
+| `poppler-utils` | `pdfinfo`, `pdftotext` | Verification step (# pages, searchable text, file size) |
+
+**Debian / Ubuntu:**
+```bash
+sudo apt-get update && sudo apt-get install -y python3-venv poppler-utils
+```
+
+**macOS:**
+```bash
+brew install poppler
+```
+
+**Arch:**
+```bash
+sudo pacman -S python-virtualenv poppler
+```
+
+### WeasyPrint setup (one-liner)
+
+```bash
+python3 -m venv /tmp/pdfenv
+source /tmp/pdfenv/bin/activate
+pip install --upgrade pip
+pip install weasyprint
+```
+
+> WeasyPrint also needs GTK (Pango/Cairo). On most Linux desktops these are already present. On headless servers:
+> ```bash
+> # Debian/Ubuntu headless
+> sudo apt-get install -y libpango-1.0-0 libcairo2 libgdk-pixbuf2.0-0
+> ```
+
+### Verification that everything works
+
+```bash
+source /tmp/pdfenv/bin/activate
+python -c "import weasyprint; print(weasyprint.__version__)"
+which pdfinfo
+which pdftotext
+```
+
+All three commands must succeed before generating PDFs.
+
 ## CSS Baseline (copy this)
 
 ```css
