@@ -154,20 +154,36 @@ h2, h3 { page-break-after: avoid; }
 
 ## Dark Theme (When Not White)
 
-Dark backgrounds render perfectly in WeasyPrint as long as the color is set explicitly on `html, body`. The "white only" rule was overly strict.
+Dark backgrounds render perfectly in WeasyPrint. **Do NOT use `@page { background: ... }`** — that property is poorly supported and can produce unexpected color shifts. Instead, remove page margins entirely and use a centered `.page` container.
 
 ### Required for dark backgrounds
 
 ```css
+@page {
+  size: letter portrait;   /* or A4 */
+  margin: 0;               /* remove white margin boxes */
+}
+
 html, body {
-  background-color: #0E0D0B;   /* set explicitly */
+  background-color: #0E0D0B;   /* obsidian — set explicitly */
   color: #E8DDC4;
+}
+
+.page {
+  position: relative;
+  max-width: 520pt;        /* ~70% of letter width */
+  margin: 0 auto;          /* center the content column */
+  padding: 28pt 24pt 48pt; /* internal spacing */
 }
 ```
 
+### Why `margin: 0` is required
+
+WeasyPrint's default `@page` margins render as **white boxes** around the content. Setting `background` on `body` only fills the content area, not the margin area. `@page { margin: 0 }` eliminates those boxes so the dark body background bleeds edge-to-edge.
+
 ### Pitfall: `margin-bottom` on `page-break-inside: avoid` blocks
 
-If two consecutive elements both have `page-break-inside: avoid`, a `margin-bottom` on the first one can force the second onto its own page — creating an orphan.
+If two consecutive elements both have `page-break-inside: avoid`, a `margin-bottom` on the first can force the second onto its own page — creating an orphan.
 
 **Bad:**
 ```css
@@ -202,6 +218,16 @@ If two consecutive elements both have `page-break-inside: avoid`, a `margin-bott
 | Narrative/pull-quote | `avoid` on container | — |
 | CTA block | `avoid` on container | — |
 | Footer | **remove** `avoid` — let it flow with CTA | — |
+
+## Converting an Existing HTML Design
+
+When converting a browser-designed HTML to PDF:
+
+1. **Inspect in Chrome first** — Use DevTools to verify the actual layout: `max-width`, margins, background behavior, card spacing.
+2. **Map px → pt** — Browser designs use `px`; PDF uses `pt`. Divide by 1.33 (e.g., `18px` ≈ `13.5pt`).
+3. **Remove interaction CSS** — Strip `transition`, `hover`, `cursor`, `animation` — they have no effect in PDFs and bloat the stylesheet.
+4. **Test with WeasyPrint early** — Don't perfect the HTML in Chrome; WeasyPrint's layout engine differs. Iterate with `weasyprint input.html output.pdf` and `pdftoppm` for visual checks.
+5. **Verify no orphans** — Check page count (`pdfinfo`) and visually inspect each page for stranded headers/footers.
 
 ## Conversion
 
